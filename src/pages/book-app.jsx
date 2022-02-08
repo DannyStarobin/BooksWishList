@@ -1,4 +1,5 @@
 import React from "react"
+import { WishList } from "../cmps/wish-list"
 
 
 export class BookApp extends React.Component {
@@ -23,12 +24,17 @@ export class BookApp extends React.Component {
         this.setState({ wishList })
     }
 
-    render() {
-        if (!books || !wishList) return <React.Fragment>loading...</React.Fragment>
-            return (
-           <section>
+    onRemoveWish = (wish) => {
+        bookService.removeWishFromList(wish)
+    }
 
-           </section>
+    render() {
+        const { books, wishList } = this.stste
+        if (!books || !wishList) return <React.Fragment>loading...</React.Fragment>
+        return (
+            <section>
+                <WishList wishList={wishList} onRemoveWish={this.onRemoveWish} />
+            </section>
         )
     }
 }
